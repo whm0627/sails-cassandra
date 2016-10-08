@@ -1,22 +1,16 @@
 {
   "name": "sails-cassandra",
-  "description": "Apache Cassandra 2.x adapter for Sails/Waterline",
-  "version": "0.10.10",
-  "author": {
-    "name": "Alkeron Multimedia Inc.",
-    "email": "info@alkeron.com"
-  },
+  "description": "Apache Cassandra adapter for Sails/Waterline",
+  "version": "0.12.8",
+  "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
       "name": "dtoubelis"
     }
   ],
-  "scripts": {
-    "test": "make test"
-  },
   "main": "./lib/adapter.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0"
   },
   "repository": {
     "type": "git",
@@ -32,19 +26,23 @@
     "orm"
   ],
   "dependencies": {
-    "async": "~0.9.0",
-    "cassandra-driver": "v2.2.2",
-    "lodash": "~2.4.0",
-    "long": "~2.2.0",
-    "through2": "~0.6.3",
+    "async": "^2.0.1",
+    "cassandra-driver": "^3.0.0",
+    "lodash": "^4.15.0",
+    "long": "^3.2.0",
+    "mocha": "^3.0.2",
+    "semver": "^5.3.0",
+    "through2": "^2.0.1",
     "waterline-errors": "~0.10.0"
   },
   "devDependencies": {
     "captains-log": "~0.11.5",
-    "jshint": "~2.6.3",
-    "mocha": "~2.2.0",
-    "waterline": "~0.10.0",
-    "waterline-adapter-tests": "~0.10.7"
+    "eslint": "^3.1.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0",
+    "waterline": "^0.12.2",
+    "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
     "waterlineVersion": "~0.10.0",
@@ -52,28 +50,11 @@
       "semantic"
     ]
   },
-  "license": "MIT",
-  "gitHead": "13c948d9264094905b0b5b1695e3278c922c15cc",
-  "homepage": "https://github.com/dtoubelis/sails-cassandra",
-  "_id": "sails-cassandra@0.10.10",
-  "_shasum": "318afa274e6102f80ad9556fdb417a69d69bf96e",
-  "_from": "sails-cassandra@0.10.10",
-  "_npmVersion": "1.4.28",
-  "_npmUser": {
-    "name": "dtoubelis",
-    "email": "dmitri@toubelis.org"
+  "scripts": {
+    "lint": "node_modules/.bin/eslint lib test",
+    "test-unit": "NODE_ENV=test node_modules/.bin/mocha --reporter spec --check-leaks test/unit/*.js",
+    "test-integration": "NODE_ENV=test node test/integration/runner.js",
+    "test": "npm run test-unit"
   },
-  "maintainers": [
-    {
-      "name": "dtoubelis",
-      "email": "dmitri@toubelis.org"
-    }
-  ],
-  "dist": {
-    "shasum": "318afa274e6102f80ad9556fdb417a69d69bf96e",
-    "tarball": "http://registry.npmjs.org/sails-cassandra/-/sails-cassandra-0.10.10.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/sails-cassandra/-/sails-cassandra-0.10.10.tgz",
-  "readme": "ERROR: No README data found!"
+  "license": "MIT"
 }

@@ -11,7 +11,7 @@
 
 
 # sails-cassandra
-Apache Cassanda 2.+ database adapter for Sails/Waterline
+Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x versions of Cassandra.
 
 > Implements:
 > - [Semantic](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface)
@@ -29,12 +29,12 @@ Apache Cassanda 2.+ database adapter for Sails/Waterline
 >   - .stream()
 
 
+
 ## 1. Installation
-Install from NPM.
+Install from NPM:
 
 ```bash
-# In your app:
-$ npm install sails-cassandra
+$ npm install sails-cassandra --save
 ```
 
 ## 2. Configuring Sails
@@ -188,34 +188,47 @@ models for existing tables:
 | blob           | 3       | [Buffer]       | [Buffer]          | binary               |
 | boolean        | 4       | Boolean        | Boolean           | boolean              |
 | counter        | 5       | [Long]         | Number or NaN     | integer              |
+| date           | 17      | [LocalDate]    | Date              | date                 |
 | decimal        | 6       | [BigDecimal]   | Number or NaN     | float                |
-| double         | 7       | Number         | Number            | float                |
-| float          | 8       | Number         | Number            | float                |
+| double         | 7       | [Number]       | Number            | float                |
+| float          | 8       | [Number]       | Number            | float                |
 | inet           | 16      | [InetAddress]  | String            | string               |
-| int            | 9       | Number         | Number            | integer              |
+| int            | 9       | [Number]       | Number            | integer              |
 | list           | 32      | Array          | Array             | array                |
-| map            | 33      | Object         | Null              | not supported (null) |
-| set            | 34      | Array          | Null              | not supported (null) |
+| map            | 33      | Object/ES6 Map | Null              | not supported (null) |
+| set            | 34      | Array/ES6 Set  | Null              | not supported (null) |
+| smallint       | 19      | [Number]       | Number            | integer              |
 | text           | 10      | String         | String            | text                 |
+| time           | 18      | [LocalTime]    | Number            | integer              |
 | timestamp      | 11      | Date           | Date              | datetime or date     |
 | timeuuid       | 15      | [TimeUuid]     | String            | string               |
+| tynyint        | 20      | [Number]       | Number            | integer              |
+| tuple          | 49      | [Tuple]        | Array             | array                |
 | uuid           | 12      | [Uuid]         | String            | string               |
 | varchar        | 13      | String         | String            | text                 |
 | varint         | 14      | [Integer]      | Number or NaN     | integer              |
 
 [Buffer]: https://nodejs.org/api/buffer.html
 
-[Long]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Long.html
+[Long]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Long.html
 
-[BigDecimal]: http://www.datastax.com/drivers/nodejs/2.0/module-types-BigDecimal.html
+[Number]: http://datastax.github.io/nodejs-driver/features/datatypes/numerical/
 
-[InetAddress]: http://www.datastax.com/drivers/nodejs/2.0/module-types-InetAddress.html
+[LocalDate]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalDate.html
 
-[TimeUuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-TimeUuid.html
+[LocalTime]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalTime.html
 
-[Uuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Uuid.html
+[BigDecimal]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-BigDecimal.html
 
-[Integer]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Integer.html
+[InetAddress]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-InetAddress.html
+
+[TimeUuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-TimeUuid.html
+
+[Tuple]: http://datastax.github.io/nodejs-driver/features/datatypes/tuples/
+
+[Uuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Uuid.html
+
+[Integer]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Integer.html
 
 
 ### 4.4. Use of indexes
@@ -338,7 +351,12 @@ will cause the adapter to throw an exception.
 Only `limit` is curently implemented and works as expected. `sort` and `skip` are
 not supported and silently ignored if provided.
 
+## 5. Version History
+- 0.12.x - Supports Apache Cassandra v2.x and v3.x, uses [cassandra-driver] v3.x, requires Node.js v4+
+- 0.10.x - Supports Apache Cassandra v2.x, uses [cassandra-driver] v2.x, requires Node.js v0.10+
 
-## 5. License
+[cassandra-driver]: https://www.npmjs.com/package/cassandra-driver
+
+## 6. License
 See [LICENSE.md](./LICENSE.md) file for details.
 
